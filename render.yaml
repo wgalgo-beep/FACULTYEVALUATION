@@ -1,0 +1,14 @@
+# Optional "Blueprint" for Render (New > Blueprint). You can also create the Web Service by hand (see HOSTING-GUIDE.md).
+services:
+  - type: web
+    name: ccd-faculty-evaluation
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL      # paste your Neon connection string
+        sync: false
+      - key: ADMIN_PASSWORD    # first-run admin password
+        sync: false
