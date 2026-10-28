@@ -67,7 +67,7 @@ const reload=async()=>{D=await api("GET","/admin/data")};
 async function mut(m,u,b,fn){try{const j=await api(m,u,b);await reload();if(fn)fn(j);render()}catch(e){alert(e.message)}}
 async function bak(){try{const d=await api("GET","/admin/data"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,1)],{type:"application/json"}));a.download="faculty-evaluation-backup-"+new Date().toISOString().slice(0,10)+".json";a.click()}catch(e){alert(e.message)}}
 async function go(t){S.tab=t;try{await reload()}catch(e){}render()}
-const dsc=x=>x>=4.5?"Outstanding":x>=3.5?"Very Satisfactory":x>=2.5?"Satisfactory":x>=1.5?"Fair":"Poor";
+const dsc=x=>{x=+x.toFixed(5);return x>=5?"Outstanding":x>=4?"Very Satisfactory":x>=3?"Satisfactory":x>=2?"Fair":"Poor"};
 const mean=L=>L.length?L.reduce((a,e)=>a+e.r.reduce((p,q)=>p+q,0)/N,0)/L.length:0;
 const tn=id=>(D.teachers.find(t=>t.id==id)||{name:"(removed teacher)"}).name;
 
